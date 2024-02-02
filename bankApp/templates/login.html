@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if user.activated == False %}
+                <div class="alert alert-warning">
+                    Contact: 333 444 999 or bank@mail.com
+                </div>
+            {% else %}
+                {% if not user %}
+                    <!-- Account Number Form -->
+                    <form method="post" id="account-number-form" class="mb-3" >
+                        <div class="mb-3">
+                            <label for="account_number" class="form-label">Enter account number</label>
+                            <input maxlength="7" type="text" class="form-control" id="account_number" name="account_number" required pattern="[0-9]{7}">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Next</button>
+                    </form>
+                {% else %}
+                    <!-- Password Form -->
+                    <form method="post" id="password-form" >
+                        {% if user %}
+                        <label for="partial_password" class="form-label">Enter password</label>
+                            <div class="d-flex justify-content-center mb-3">
+                                {% for i in range(0, password_length) %}
+                                    <div class="security-number-field form-group mx-1">
+                                        <input type="password" name="field{{ i }}" maxlength="1" pattern="[A-Za-z0-9!@#$%&.*?]" required class="form-control text-center {{ 'disabled' if i not in enabled_indexes }}" id="input{{ i }}" {{ 'disabled' if i not in enabled_indexes }}>
+                                        <label for="input{{ i }}" class="form-label mt-2">{{ i + 1 }}</label>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <button type="submit" name="partial_password" class="btn btn-primary">Login</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

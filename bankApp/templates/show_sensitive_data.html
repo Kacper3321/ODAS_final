@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-3 text-center">Sensitive Data</h2>
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <!-- Card for Card Number -->
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-header">Card Information</div>
+                <div class="card-body">
+                    <h5 class="card-title">Card Number</h5>
+                    <p class="card-text">{{ card_number }}</p>
+                </div>
+            </div>
+            <!-- Card for Document Number -->
+            <div class="card text-white bg-secondary">
+                <div class="card-header">Document Information</div>
+                <div class="card-body">
+                    <h5 class="card-title">Document Number</h5>
+                    <p class="card-text">{{ document_number }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

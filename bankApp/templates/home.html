@@ -1,0 +1,22 @@
+{% extends "base.html" %} 
+{% block title %}
+    Home
+{% endblock %} 
+
+{% block content %} 
+<div class="text-center">
+    <h1>Welcome {{ user.name }}</h1>
+    {% if count == 1 and user.activated == True%}
+    <div class="alert alert-info">
+        Twój sekret to {{ sekret }}.<br/> Ta wiadomość jest wyświetlana jednorazowo przy pierwszym logowaniu. <br/>Zapisz sekret w bezpiecznym miejscu i nikomu go nie udostępniaj.
+    </div>
+    {% endif %}
+    <br>
+
+    <h2>Account number:</h2>
+    <p>{{ user.account_number }}</p>
+
+    <h2>Balance:</h2>
+    <p>{{ user.balance }}</p>
+</div>
+{% endblock %}

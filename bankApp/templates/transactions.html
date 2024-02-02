@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- Kolumna dla transakcji wychodzących -->
+        <div class="col-md-6 mb-4">
+            <h2 class="mb-3" >Outgoing Transactions</h2>
+            {% if outgoing_transactions %}
+                <div class="list-group">
+                {% for transaction in outgoing_transactions %}
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ transaction.title }}</h5>
+                            <small><span style="color: red;">-{{ transaction.amount }}</span></small>
+                        </div>
+                        <p class="mb-1">To: {{ transaction.recipent_name }} {{ transaction.recipent_surname }}</p>
+                        <small>Account Number: {{ transaction.recipient.account_number }}</small>
+                    </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted">No data</p>
+            {% endif %}
+        </div>
+
+        <!-- Kolumna dla transakcji przychodzących -->
+        <div class="col-md-6 mb-4">
+            <h2 class="mb-3">Incoming Transactions</h2>
+            {% if incoming_transactions %}
+                <div class="list-group">
+                {% for transaction in incoming_transactions %}
+                    <div class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1">{{ transaction.title }}</h5>
+                            <small><span style="color: green;">+{{ transaction.amount }}</span></small>
+                        </div>
+                        <p class="mb-1">From: {{ transaction.payer_name }} {{ transaction.payer_surname }}</p>
+                        <small>Account Number: {{ transaction.payer.account_number }}</small>
+                    </div>
+                {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted">No data</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
